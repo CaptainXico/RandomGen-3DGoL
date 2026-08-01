@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Number Generator - 3D Game of Life</title>
+    <meta name="description" content="Random number generator using 3D Game of Life principles">
+    <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
+    <script src="fly.js"></script>
+    <script src="color.js"></script>
+    <script src="shader.js"></script>
+    <script src="gameoflife.js"></script>
+    
+  </head>
+  <body>
+    
+    <a-scene>
+
+      <a-assets>
+        
+      </a-assets>
+
+
+      
+
+      <!-- Floor -->
+      <a-plane 
+        id="floor"
+        class="interactive"
+        position="0 0 0" 
+        rotation="-90 0 0" 
+        width="10" 
+        height="10" 
+        color="#222" 
+        material="opacity: 0.9; roughness: 1"
+      ></a-plane>
+
+      <!-- Random Number Display Panel -->
+      <a-plane 
+        id="number-panel"
+        position="0 2 6"
+        rotation="0 0 0"
+        width="3"
+        height="1.5"
+        color="#333"
+        material="opacity: 0.8; roughness: 0.5"
+      ></a-plane>
+      
+      <!-- Random Number Text -->
+      <a-text 
+        id="number-display"
+        value="Count: 0"
+        position="0 2 6.1"
+        align="center"
+        width="4"
+        color="#00ff00"
+      ></a-text>
+
+      <!-- Introduction Panel (Left) -->
+      <a-plane 
+        id="intro-panel"
+        position="-4 2 6"
+        rotation="0 15 0"
+        width="2.5"
+        height="2"
+        color="#444"
+        material="opacity: 0.8; roughness: 0.5"
+      ></a-plane>
+      
+      <!-- Introduction Text -->
+      <a-text 
+        id="intro-text"
+        value="3D RANDOM GENERATOR\n\nUses Game of Life\ncellular automata\nin 3D space to\ngenerate random\npatterns and\nnumbers."
+        position="-4 2 6.1"
+        rotation="0 15 0"
+        align="center"
+        width="3"
+        color="#00ffff"
+      ></a-text>
+
+      <!-- Instructions Panel (Right) -->
+      <a-plane 
+        id="instructions-panel"
+        position="4 2 6"
+        rotation="0 -15 0"
+        width="2.5"
+        height="2"
+        color="#444"
+        material="opacity: 0.8; roughness: 0.5"
+      ></a-plane>
+      
+      <!-- Instructions Text -->
+      <a-text 
+        id="instructions-text"
+        value="INSTRUCTIONS\n\n• Move: WASD/Arrows\n• Look: Mouse drag\n• ESC to release\n  mouse"
+        position="4 2 6.1"
+        rotation="0 -15 0"
+        align="center"
+        width="3"
+        color="#ffff00"
+      ></a-text>
+
+      <!-- Camera rig with controllers as children -->
+      <a-entity id="camera-rig" player-fly>
+        <a-camera id="camera" position="0 1.6 7" look-controls="pointerLockEnabled: true">
+          <a-cursor id="desktop-cursor" rayOrigin="mouse" raycaster="objects: .interactive" visible="true" desktop-cursor-only></a-cursor>
+        </a-camera>
+
+        <!-- Left controller -->
+        <a-entity
+          id="left-controller"
+          laser-controls="hand: left"
+          raycaster="objects: .interactive; far: 10"
+          line="color: #00ff00; opacity: 0.8; lineWidth: 2;"
+           cursor="rayOrigin: entity"
+          thumbstick-audio
+          smooth-locomotion
+        ></a-entity>
+
+        <!-- Right controller -->
+        <a-entity
+          id="right-controller"
+          laser-controls="hand: right"
+          raycaster="objects: .interactive; far: 10"
+          line="color: #00ff00; opacity: 0.8; lineWidth: 2;"
+          cursor="rayOrigin: entity"
+          vr-smooth-turn
+          thumbstick-audio
+        ></a-entity>
+      </a-entity>
+
+      <!-- LIGHTS -->
+    <a-light type="ambient" intensity="0.4"></a-light>
+    <a-light type="point" position="0 4 2" intensity="1"></a-light>
+
+    </a-scene>
+  </body>
+</html>
